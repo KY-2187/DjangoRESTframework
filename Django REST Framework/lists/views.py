@@ -5,6 +5,9 @@ from django.views.generic.edit import CreateView
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from rest_framework import viewsets
+from .serializers import TagSerializer, ItemSerializer
+
 from .models import Item
 
 
@@ -35,6 +38,11 @@ class TaskListView(ListView):
 
 class TaskCreateView(CreateView):
 	template_name_suffix = '_create_form'
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+	queryset = Item.objects.all()
+	serializer_class = ItemSerializer
 
 
 def home_page(request):
